@@ -1,11 +1,10 @@
 {
   "pages": [    
-    "pages/personalCenter/mine/mine",
     "pages/home/index/index",
     "pages/home/survey/survey",
     "pages/home/detail/detail",
     "pages/home/upLoad/upLoad",
-
+    "pages/personalCenter/mine/mine",
     "pages/personalCenter/about/about",
     "pages/personalCenter/help/help",
     "pages/personalCenter/advice/advice",
@@ -15,7 +14,7 @@
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#0089b0",
-    "navigationBarTitleText": "星书",
+    "navigationBarTitleText": "新星书",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

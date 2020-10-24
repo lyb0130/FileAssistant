@@ -80,9 +80,9 @@ exports.main = async (event, context) => {
                                 name2: {
                                   value: t.data[0].name //填写人
                                 },
-                                // time4: {
-                                //   value: temp.deadline //截止时间
-                                // }
+                                time4: {
+                                  value: temp.deadline.replace(/\//g,"-").slice(0,-3) //截止时间
+                                }
                               },
                               templatedId: 'GL07ZsPoox1uVijvkFp5GMJpN_kkQyPGWQbZRIRZHNw' //模板ID
                             }))
@@ -131,9 +131,9 @@ exports.main = async (event, context) => {
                           character_string2: {
                             value: 'excel.xlsx' //文件格式
                           },
-                          // time3: {
-                          //   value: '' //导出时间
-                          // }
+                          time3: {
+                            value: temp.deadline.replace(/\//g,"-").slice(0,-3) //导出时间
+                          }
                         },
                         templatedId: 'fmJKCnyUjVt8262QMpjeyiuIAQ7jVVewRZpngKxoLro' //模板ID
                       }))

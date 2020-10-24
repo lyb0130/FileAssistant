@@ -64,7 +64,7 @@
         <image src="../../../images/toRight.png" class='icon-right'></image>
       </view>
     </view>
-    <view bindtap="request" class="item" formType="submit" hoverClass="none">
+    <view wx:if="{{userID == 17053221}}" bindtap="request" class="item" formType="submit" hoverClass="none">
       <view class='wallet'><text class='icon-deit icon'></text><text decode="{{true}}" space="{{true}}">&nbsp;&nbsp;</text><text>测试订阅消息</text></view>
       <view class="icon">
         <image src="../../../images/toRight.png" class='icon-right'></image>
