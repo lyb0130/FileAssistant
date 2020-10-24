@@ -1,0 +1,9 @@
+
+<view class="container">
+    <image class="logo" src="../../../images/logo.png"></image>
+    <view class="title">星书</view>
+    <view class="version">Version 1.1.0</view>
+  <view class="table">
+  <view class="content">星书是一款办公类小程序，通过识别excel文件生成问卷的形式，使得信息统计更加方便，提高工作效率。</view>
+  </view>
+</view>

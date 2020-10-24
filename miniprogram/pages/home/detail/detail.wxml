@@ -1,0 +1,26 @@
+<view class="first">
+  <view class="container">
+    <!-- <image class="top" src="../../images/top.png"></image> -->
+    <view class="body">
+      <view class="line c1"></view>
+      <view class="text t1">文件下载链接：{{fileUrl}}</view>
+      <view class="button">
+        <button class="export" style="width: 100px" bindtap="export">导出</button>
+        <button class="copy" style="width: 100px" bindtap="copy">复制</button>
+      </view>
+
+      <view class="text t2">提示：请复制到浏览器下载</view>
+      <view class="line c2"></view>
+      <view class="text t3">未提交人数：{{notSubmitNumber}}</view>
+      <view class="line c3"></view>
+      <view class="text t4">未提交人员：</view>
+
+      <view class="list_section">
+        <view class="list" wx:for="{{notSubmitName}}" wx:key="key">
+          <view>{{item}}</view>
+        </view>
+      </view>
+      <image class="delete" bindtap="delete" src="../../images/delete.png"></image>
+    </view>
+  </view>
+</view>

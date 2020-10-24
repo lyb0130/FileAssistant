@@ -1,0 +1,9 @@
+<view class="container">
+  <view class="table">
+    <form class="form" bindsubmit="save">
+      <textarea class="textarea" style="width: {{width}}px;" placeholder="请输入您的建议" name="textarea"></textarea>
+    
+      <button class="button" style="width: 120px;" form-type="submit">提交</button>
+    </form>
+  </view>
+</view>

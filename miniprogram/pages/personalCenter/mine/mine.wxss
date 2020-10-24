@@ -1,0 +1,154 @@
+/* pages/my/my.wxss */
+
+page {
+  padding-bottom: 50rpx;
+  background: #f8f8f8;
+}
+
+.header {
+  height: 450rpx;
+  width: 100%;
+  /* background: #0089b0; */
+  /* linear-gradient(#e7eaef, #0089b0); */
+  position:relative;
+
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.user {
+  top: 55rpx;
+  /* padding: 0 25rpx;
+  padding-top: 40rpx;
+  padding-bottom: 50rpx; */
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.header .gif-wave{
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  /* mix-blend-mode: screen;100rpx;   */
+  height: 100%;   
+}
+
+.logo {
+  margin: 0 auto;
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+  background: #fff;
+  will-change: transform;
+  position:relative;
+}
+
+.logo image {
+  width: 100%;
+  height: 100%;
+}
+
+.logo image {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  will-change: transform;
+}
+
+.user_info {
+  padding-top: 20rpx; 
+  /* align-items: center; */
+  /* display: flex; */
+}
+
+.user_name {
+  /* display: flex; */
+  margin: 0 auto;
+  text-align: center;
+  font-size: 36rpx;
+  font-weight: bold;
+  /* color: #fff; */
+}
+
+.user_id {
+  text-align: center;
+  margin-top: 12rpx;
+  font-size: 27rpx;
+  /* color: #fff; */
+}
+
+.editUser{
+  margin-top: 10rpx;
+  font-size:27rpx;
+  line-height:27rpx;
+  display:inline-block;
+  color:#36b4d8;
+  text-decoration:underline;
+  background-color: #ffffff;
+  border-radius: 25px;
+  border: 1px solid;
+}
+
+.nav {
+  /* height: 200rpx; */
+  padding: 0 25rpx;
+  font-size: 14px;
+  background: #fff;
+}
+
+.nav .item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 30rpx 0;
+}
+
+
+.nav button.item {
+  margin: 0;
+  line-height: inherit;
+  font-size: inherit;
+}
+
+.nav button.item .new_tips {
+  position: relative;
+}
+
+.nav button.item .new_tips:before {
+  content: '';
+  position: absolute;
+  top: -2rpx;
+  right: -14rpx;
+  width: 20rpx;
+  height: 20rpx;
+  background-color: #f43530;
+  border-radius: 100%;
+}
+
+.nav .icon {
+  display: flex;
+  align-items: center;
+  font-size: 40rpx;
+  color:#333;
+}
+.nav .wallet{
+  display:inline-flex;
+}
+.nav .wallet .icon {
+  color: #c21327;
+}
+
+.nav .discount_coupon .icon {
+  color: #bd9445;
+}
+
+.nav image {
+  margin-left: 20rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+

@@ -1,0 +1,21 @@
+<view class="first">
+  <view class="container">
+    <view class="section">
+      <view class="section__title">1. 请选择截止日期</view>
+      <picker mode="date" value="{{date}}" start="2020-10-01" end="2050-10-01" bindchange="bindDateChange">
+        <view class="picker">
+          当前选择: {{date}}
+        </view>
+      </picker>
+    </view>
+    <view class="section">
+      <view class="section__title">2. 请选择截止时间</view>
+      <picker mode="time" value="{{time}}" start="00:00" end="23:00" bindchange="bindTimeChange">
+        <view class="picker">
+          当前选择: {{time}}
+        </view>
+      </picker>
+    </view>
+    <button class="button" bindtap="upDate">导入excel并确认</button>
+  </view>
+</view>

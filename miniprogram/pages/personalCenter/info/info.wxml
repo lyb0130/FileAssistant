@@ -1,0 +1,19 @@
+<!--pages/info/info.wxml-->
+<view class="container">
+  <view class="table">
+    <form class="form" bindsubmit="save">
+      <view class="temp">
+        <text class="text"> 姓名：</text>
+        <input name="name" class="input" value="{{userName}}" placeholder="请输入姓名"/>
+      </view>
+      <view class="temp">
+        <text class="text">学工号：</text>
+        <input name="id" class="input" value="{{userID}}" placeholder="请输入学工号"/>
+      </view>
+      <!-- <view class="temp">
+        其他：<input class="input"/>
+      </view>    -->
+      <button class="button" style="width: 120px;" form-type="submit">确认</button>
+    </form>
+  </view>
+</view>

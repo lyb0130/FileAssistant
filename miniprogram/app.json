@@ -1,0 +1,36 @@
+{
+  "pages": [    
+    "pages/personalCenter/mine/mine",
+    "pages/home/index/index",
+    "pages/home/survey/survey",
+    "pages/home/detail/detail",
+    "pages/home/upLoad/upLoad",
+
+    "pages/personalCenter/about/about",
+    "pages/personalCenter/help/help",
+    "pages/personalCenter/advice/advice",
+    "pages/personalCenter/info/info"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#0089b0",
+    "navigationBarTitleText": "星书",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [{
+      "iconPath": "images/home.png",
+      "selectedIconPath": "images/selectedHome.png",
+      "pagePath": "pages/home/index/index",
+      "text": "首页"
+    }, {
+      "iconPath": "images/mine.png",
+      "selectedIconPath": "images/selectedMine.png",
+      "pagePath": "pages/personalCenter/mine/mine",
+      "text": "个人中心"
+    }]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}
