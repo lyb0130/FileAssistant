@@ -20,7 +20,7 @@
           <view>{{item}}</view>
         </view>
       </view>
-      <image class="delete" bindtap="delete" src="../../images/delete.png"></image>
+      <image class="delete" bindtap="delete" src="../../../images/delete.png"></image>
     </view>
   </view>
 </view>
