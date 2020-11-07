@@ -71,7 +71,6 @@ page {
   text-align: center;
   font-size: 36rpx;
   font-weight: bold;
-  /* color: #fff; */
 }
 
 .user_id {

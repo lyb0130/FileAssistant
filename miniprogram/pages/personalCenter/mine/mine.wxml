@@ -4,15 +4,17 @@
     <view class="user" hoverClass="none">
       <view class="user_box">
         <view catchtap="previewImage" class="logo">
-          <open-data style="width: 100%;height: 100%;border-radius: 100%;will-change: transform;overflow:hidden;display:block" type="userAvatarUrl"></open-data>
+          <open-data
+            style="width: 100%;height: 100%;border-radius: 100%;will-change: transform;overflow:hidden;display:block"
+            type="userAvatarUrl"></open-data>
           <view class="cu-tag badge {{male==1?'icon-male bg-blue':'icon-female bg-pink'}}"></view>
         </view>
         <block wx:if="{{IsRegister}}">
           <view class="user_info">
-            <view class="user_name">            
+            <view class="user_name">
               <text>{{userName}}</text>
             </view>
-            <view class="user_id">学工号：{{userID}}           
+            <view class="user_id">学工号：{{userID}}
             </view>
             <button class="editUser" bindtap='editUser' style="width: 100%;">编辑信息</button>
           </view>
@@ -20,7 +22,7 @@
         <block wx:else>
           <view class="user_info">
             <view class="user_name">
-            <open-data type="userNickName" lang="zh_CN"></open-data>
+              <open-data type="userNickName" lang="zh_CN"></open-data>
               <!-- <text>{{userInfo.nickName}}</text> -->
             </view>
             <button class="editUser" bindtap='editUser' style="width: 100%;">请完善个人信息</button>
@@ -28,10 +30,17 @@
         </block>
       </view>
     </view>
-    
+
   </view>
   <!-- 功能列表 -->
   <view class="nav">
+    <view bindtap="requestMsg" class="item" formType="submit" hoverClass="none">
+      <view class='wallet'><text class='icon-deit icon'></text><text decode="{{true}}"
+          space="{{true}}">&nbsp;&nbsp;</text><text style= "font-weight: bold;  color: rgb(62, 181, 236);">订阅消息（问卷填写提醒）</text></view>
+      <view class="icon">
+        <image src="../../../images/toRight.png" class='icon-right'></image>
+      </view>
+    </view>
     <view bindtap="openPage" class="item" data-url="../help/help" formType="submit" hoverClass="none">
       <view class='wallet'>
         <text class='icon-form icon'></text>
@@ -53,19 +62,16 @@
       </view>
     </view>
     <view bindtap="openPage" class="item" data-url="../advice/advice" formType="submit" hoverClass="none">
-      <view class='wallet'><text class='icon-deit icon'></text><text decode="{{true}}" space="{{true}}">&nbsp;&nbsp;</text><text>意见反馈</text></view>
+      <view class='wallet'><text class='icon-deit icon'></text><text decode="{{true}}"
+          space="{{true}}">&nbsp;&nbsp;</text><text>意见反馈</text></view>
       <view class="icon">
         <image src="../../../images/toRight.png" class='icon-right'></image>
       </view>
     </view>
-    <view bindtap="requestMsg" class="item" formType="submit" hoverClass="none">
-      <view class='wallet'><text class='icon-deit icon'></text><text decode="{{true}}" space="{{true}}">&nbsp;&nbsp;</text><text>订阅消息</text></view>
-      <view class="icon">
-        <image src="../../../images/toRight.png" class='icon-right'></image>
-      </view>
-    </view>
+
     <view wx:if="{{userID == 17053221}}" bindtap="request" class="item" formType="submit" hoverClass="none">
-      <view class='wallet'><text class='icon-deit icon'></text><text decode="{{true}}" space="{{true}}">&nbsp;&nbsp;</text><text>测试订阅消息</text></view>
+      <view class='wallet'><text class='icon-deit icon'></text><text decode="{{true}}"
+          space="{{true}}">&nbsp;&nbsp;</text><text>测试订阅消息</text></view>
       <view class="icon">
         <image src="../../../images/toRight.png" class='icon-right'></image>
       </view>
@@ -73,4 +79,3 @@
   </view>
 </view>
 <!-- 获取用户的姓名和头像 -->
-

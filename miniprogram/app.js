@@ -17,13 +17,11 @@ App({
 
     wx.cloud.callFunction({
       name: "save_openID",
-      data:{
-        id: this.globalData.unique_id
-      }
     }).then(res=>{
       console.log(res)
       this.globalData.unique_id = res.result[0]
       this.globalData.openid = res.result[1]
+      this.globalData.name = res.result[2]
       if(this.globalData.unique_id == -1){
         this.globalData.IsVistor = true
       }
@@ -33,6 +31,7 @@ App({
   globalData: {
     unique_id: 0,//0,
     openid:"",
+    name:"",
     judgment: true,
     index: 0,
     IsVistor: false,

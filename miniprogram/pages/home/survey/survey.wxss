@@ -1,64 +1,46 @@
 .box {
-  /* height:100%; */
-  flex: 1;
-  margin-top: 0px;
+  height:auto;
+  bottom:0px;
+  top:0px;
+  left:0px;
+  right:0px;
+  /* flex: 1; */
   position: absolute;
   background-color: #e7eaef;
-  width: 100%;
 }
 .container {
-  /* margin: 20px,20px,20px,20px;
-   */
-   /* position: fixed; */
-   /* display: flex;  */
-   height: 100%;
+   height: auto;
    /* background-color: #77c5eb; */
    background-color: #61bdd8;
-   /* width: 380; */
+   position: relative;
    justify-content: center;
    margin-left: 10px;
    margin-right: 10px;
    margin-top: 10px;
+   margin-bottom: 10px;
    border-radius: 12px;
-   border-width: 10px;
+   padding: 2px;
+   border-width: 0px;
   }
   
 .table {
-  height: 80%;
+  position: relative;
+  margin-top: 20px;
   margin-left: 20px;
   margin-right: 20px;
   padding: 0px;
-  /* position: fixed; */
-  /* margin-top: 15px; */
   background-color: #ffffff;
-  /* margin-top: 10px; */
   margin-bottom: 20px;
-  /* border-radius: 12px; */
-  /* border-color: rgb(12, 12, 12); */
-  /* border-radius: 10px; */
-  /* border-width: 10px; */
-  /* padding: 1px; */
-  /* rgb(226, 213, 213); */
-}
-.top {
-  background-color: #61bdd8;
-  height: 20px;
-  /* margin-top: 5px; */
-  padding: 0px;
-  border-radius: 12px;
-  border-end-end-radius: 12px;
 }
 
 .page-section{
   margin-bottom: 20rpx;
 }
 
-
-/* .page-body {
-  margin-top: 12px;
-} */
 .button {
-  margin-bottom: 20px;
+  /* height:20px; */
+  margin-top: 30px;
+  position: relative;
   background-color:  #36b4d8;
   color: #ffffff;
 }

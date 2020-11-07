@@ -12,8 +12,8 @@ const db = cloud.database()
 
 exports.main = async (event, context) => {
   //后续会对此部分进行优化
-  var nowTime = new Date().getTime()
-  var middleTime = new Date(nowTime + 3600 * 1000).getTime()
+  var nowTime = new Date().getTime() + 8 * 3600 * 1000
+  var middleTime = new Date(nowTime).getTime() + 3600 * 1000 //现在时间加一小时
   console.log(middleTime)
   console.log(nowTime)
   return new Promise((resolve) => {
@@ -40,7 +40,8 @@ exports.main = async (event, context) => {
               resolve(endTime)
             })
           }).then(endTime => {
-            if (endTime < middleTime && endTime > nowTime) {
+            console.log(temp.deadline, ": ", endTime)
+            if (endTime <= middleTime && endTime > nowTime) {
               //距离提交时间在一小时以内，发送提醒消息
               console.log("一小时内", i)
               //发送订阅消息
@@ -54,7 +55,7 @@ exports.main = async (event, context) => {
                 resolve(idList.forEach(item => {
                   // for (let j in idList) {
                   new Promise((resolve) => {
-                      console.log("遍历名单", i++, j)
+                      console.log("遍历名单", i, j++)
                       //获取_openid
                       setTimeout(() => {
                         resolve(db.collection("user").where({
@@ -69,22 +70,23 @@ exports.main = async (event, context) => {
                           const openid = t.data[0]._openid
                           console.log(openid, i, j)
                           if (t.data[0]._openid != undefined) {
-                            console.log("发送订阅消息", i - 1, j++)
+                            console.log("发送订阅消息", i - 1, j)
                             resolve(cloud.openapi.subscribeMessage.send({
-                              tourser: openid,
+                              touser: openid,
                               page: 'pages/home/index/index',
+                              miniprogram_state: 'developer',
                               data: {
                                 thing1: {
                                   value: temp.title //问卷名称
                                 },
-                                name2: {
-                                  value: t.data[0].name //填写人
-                                },
+                                // name2: {
+                                //   value: t.data[0].name //填写人
+                                // },
                                 time4: {
-                                  value: temp.deadline.replace(/\//g,"-").slice(0,-3) //截止时间
+                                  value: temp.deadline.replace(/\//g, "-").slice(0, -3) //截止时间
                                 }
                               },
-                              templatedId: 'GL07ZsPoox1uVijvkFp5GMJpN_kkQyPGWQbZRIRZHNw' //模板ID
+                              template_id: 'GL07ZsPoox1uVijvkFp5GHwEv-2q82WTJzKTG036DKI' //模板ID
                             }))
                           }
                         }, 50)
@@ -92,9 +94,9 @@ exports.main = async (event, context) => {
                     }).then(res => console.log(res)).catch(err => console.log(err))
                   // }
                 }))
+                i++
               }))
-
-            } else if (endTime < nowTime) {
+            } else if (nowTime >= endTime && nowTime < endTime + 0.5 * 3600 * 1000) {
               //已过截止时间，停止问卷的提交，并导出问卷，给发布者发送订阅消息(下载链接）
               console.log("已到期", i)
               db.collection("demo").where({
@@ -120,22 +122,22 @@ exports.main = async (event, context) => {
                       console.log("发送问卷终止消息", i++)
                       console.log(it.data[0]._openid)
                       resolve(cloud.openapi.subscribeMessage.send({
-                        tourser: it.data[0]._openid,
+                        touser: it.data[0]._openid,
                         page: 'pages/home/index/index',
-                        miniprogramState: 'developer',
+                        miniprogram_state: 'developer',
                         lang: 'zh_CN',
                         data: {
                           thing1: {
                             value: temp.title //文件名
                           },
                           character_string2: {
-                            value: 'excel.xlsx' //文件格式
+                            value: 'excel(xlsx)' //文件格式
                           },
                           time3: {
-                            value: temp.deadline.replace(/\//g,"-").slice(0,-3) //导出时间
+                            value: temp.deadline.replace(/\//g, "-").slice(0, -3) //导出时间
                           }
                         },
-                        templatedId: 'fmJKCnyUjVt8262QMpjeyiuIAQ7jVVewRZpngKxoLro' //模板ID
+                        template_id: 'fmJKCnyUjVt8262QMpjeyiuIAQ7jVVewRZpngKxoLro' //模板ID
                       }))
                     }, 200)
                   })

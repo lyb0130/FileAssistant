@@ -59,9 +59,15 @@ Page({
       count: 1,
       type: 'file',
       success: res => {
+        
         var filePath = res.tempFiles[0].path
         var fileName = res.tempFiles[0].name
         this.cloudFile(filePath, fileName)
+      }
+      ,
+      fail: err => {
+        wx.hideLoading()
+        console.log(err)
       }
     })
   },
@@ -105,6 +111,7 @@ Page({
         name: "up_excel",
         data: {
           creater_id: app.globalData.unique_id,
+          creater_name:app.globalData.name,
           fileID: fileId,
           fileName: fileName,
           deadline: this.data.deadline

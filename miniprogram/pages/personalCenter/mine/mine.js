@@ -9,7 +9,7 @@ Page({
   },
   requestMsg() {
     wx.requestSubscribeMessage({
-        tmplIds: ['fmJKCnyUjVt8262QMpjeyiuIAQ7jVVewRZpngKxoLro', 'GL07ZsPoox1uVijvkFp5GMJpN_kkQyPGWQbZRIRZHNw']
+        tmplIds: ['GL07ZsPoox1uVijvkFp5GHwEv-2q82WTJzKTG036DKI','EdjVVFMnmn79C4xEwwV13JO2x3viBSyDOikvP3fplKA', 'fmJKCnyUjVt8262QMpjeyiuIAQ7jVVewRZpngKxoLro']
       })
       .then(res => {
         console.log(res)
@@ -19,7 +19,8 @@ Page({
   },
   request(){
     wx.cloud.callFunction({
-      name: "test",
+      name: "send_message",
+      // name:"test"
     }).then(res=>console.log(res)).catch(err=>console.log(err))
   },
   onLoad: function (options) {

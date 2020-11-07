@@ -11,6 +11,7 @@ const _ = db.command
 // 云函数入口函数
 exports.main = async (event, context) => {
   const creater_id = event.creater_id
+  var creater_name = event.creater_name
   var fileID = event.fileID
   var fileName = event.fileName
   var deadline = event.deadline
@@ -33,10 +34,10 @@ exports.main = async (event, context) => {
     (_c, i) => sheetData[i + 2][1]
   )
   var nameList = Array.from({
-    length: sheetData.length - 2
-  },
-  (_t, j) => sheetData[j + 2][2]
-)
+      length: sheetData.length - 2
+    },
+    (_t, j) => sheetData[j + 2][2]
+  )
   //获取表格主体内容，并在第一列插入false，表示未提交  
   var content = Array.from({
       length: sheetData.length - 2
@@ -45,7 +46,7 @@ exports.main = async (event, context) => {
       sheetData[i + 2].unshift(false)
       return sheetData[i + 2]
     })
-    console.log(sheets[0])
+  console.log(sheets[0])
   //链式调用
   return new Promise((resolve, reject) => {
       resolve(db.collection("demo").where({
@@ -71,49 +72,68 @@ exports.main = async (event, context) => {
             header: header,
             content: content,
             deadline: deadline,
-            creater_id: creater_id
+            creater_id: creater_id,
+            isActive: "true"
           }
         }))
       })
       //向须填写者的档案中加入该文件名，初始化为false，即未提交
       const promise2 = new Promise((resolve) => {
-          for(let j in idList){
-            db.collection("user").where({
-              sno:idList[j]
-            }).get().then(res=>{
-                if(res.data.length != 0){
-                  db.collection("user").where({
-                    sno: idList[j]
-                  }).update({
-                    data: {
-                      toMeFile: _.push(
-                        [{
-                          title: fileName,
-                          deadline: deadline,
-                          IsSubmit: false
-                        }])
-                    }
-                  })
-                }else{
-                  console.log(j,idList[j],nameList[j])
-                  // console.log(idList,nameList)
-                  db.collection("user").add({
-                    data:{
-                      sno:idList[j],
-                      name:nameList[j],
-                      toMeFile:
-                        [{
-                          title: fileName,
-                          deadline: deadline,
-                          IsSubmit: false
-                        }],
-                    }
-                  }).then(res=>console.log(res))
+        for (let j in idList) {
+          db.collection("user").where({
+            sno: idList[j]
+          }).get().then(res => {
+            if (res.data.length != 0) {
+              db.collection("user").where({
+                sno: idList[j]
+              }).update({
+                data: {
+                  toMeFile: _.push(
+                    [{
+                      title: fileName,
+                      deadline: deadline,
+                      IsSubmit: false
+                    }])
                 }
-            })
-          }
-        }      
-      );
+              })
+              if(res.data[0]._openid){
+                let openid = res.data[0]._openid
+                cloud.openapi.subscribeMessage.send({
+                  touser: openid,
+                  page: 'pages/home/index/index',
+                  miniprogram_state: 'developer',
+                  data: {
+                    thing1: {
+                      value: fileName //问卷名称
+                    },
+                    thing2: {
+                      value: "截止时间："+deadline.replace(/\//g, "-") //温馨提示
+                    },
+                    thing3: {
+                      value: creater_name//联系人
+                    }
+                  },
+                  template_id: 'EdjVVFMnmn79C4xEwwV13JO2x3viBSyDOikvP3fplKA' //模板ID
+                })
+              }
+            } else {
+              console.log(j, idList[j], nameList[j])
+              // console.log(idList,nameList)
+              db.collection("user").add({
+                data: {
+                  sno: idList[j],
+                  name: nameList[j],
+                  toMeFile: [{
+                    title: fileName,
+                    deadline: deadline,
+                    IsSubmit: false
+                  }],
+                }
+              }).then(res => console.log(res))
+            }
+          })
+        }
+      });
       const promise3 = new Promise((resolve) => {
         db.collection("user").where({
           sno: creater_id
@@ -129,7 +149,9 @@ exports.main = async (event, context) => {
         })
       })
       Promise.all([promise1, promise2, promise3]).then(
-        res => console.log(res))        
+        res => {
+          console.log(res)
+        })
     })
     .then(res => {
       console.log(res)

@@ -100,9 +100,12 @@
   font-size: 15px;
 }
 .delete {
-  position: fixed;
+  /* position: fixed; */
   width: 35px;
   height: 35px;
   bottom: 100px;
-  right: 170px;
+  /* right: 170px; */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }

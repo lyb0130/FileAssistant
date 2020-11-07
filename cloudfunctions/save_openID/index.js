@@ -14,10 +14,10 @@ exports.main = async (event, context) => {
     _openid: wxContext.OPENID
   }).get().then(res => {
     //已经注册
-    return [res.data[0].sno, wxContext.OPENID]
+    return [res.data[0].sno, wxContext.OPENID, res.data[0].name]
   }).catch(err => {
     //尚未注册
     console.log(err)
-    return [-1, wxContext.OPENID]
+    return [-1, wxContext.OPENID,""]
   })
 }

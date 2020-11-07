@@ -1,9 +1,9 @@
-
+<!--pages/personalCenter/about/about.wxml-->
 <view class="container">
     <image class="logo" src="../../../images/logo.png"></image>
     <view class="title">新星书</view>
     <view class="version">Version 1.1.0</view>
   <view class="table">
-  <view class="content">新星书是一款办公类小程序，通过识别excel文件生成问卷的形式，使得信息统计更加方便，提高工作效率。</view>
+  <view class="content">新星书是一款问卷类办公小程序，用户将excel文件格式的按照规定形式上传至小程序，即可生成对应问卷，并兼有问卷的填写与导出、倒计时、问卷填写提醒、问卷导出提醒等功能。一方面简化了文件的创建，为问卷发布者提供了便利；另一方面及时提醒用户填写问卷，为统计工作的顺利进行提供了充分的保障。</view>
   </view>
 </view>
