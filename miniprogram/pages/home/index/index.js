@@ -281,7 +281,7 @@ Page({
     }).then(res => {
       console.log(res)
       this.setData({
-        nowTime: res.result + 4000 //程序运行至显示倒计时有4秒延迟，故在此表示
+        nowTime: res.result
       })
       console.log(this.data.nowTime)
       console.log(new Date().getTime())
