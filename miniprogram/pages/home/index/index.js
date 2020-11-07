@@ -623,9 +623,16 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title: `高效办公、放心使用`,
-      desc: '高效、便捷、大家都在用',
-      path: '/pages/login/login'
+      title: `新星书：一键创建问卷·你也可以`,
+      desc: '高效办公、放心使用',
+      path: '/pages/home/index/index'
+    }
+  },
+  onShareTimeline:function () {
+    return {
+      title: `新星书：一键创建问卷·你也可以`,
+      desc: '高效办公、放心使用',
+      path: '/pages/home/index/index'
     }
   },
   /**
