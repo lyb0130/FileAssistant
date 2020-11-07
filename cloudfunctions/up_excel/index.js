@@ -107,7 +107,7 @@ exports.main = async (event, context) => {
                       value: fileName //问卷名称
                     },
                     thing2: {
-                      value: "截止时间："+deadline.replace(/\//g, "-") //温馨提示
+                      value: "请注意截止时间"//温馨提示
                     },
                     thing3: {
                       value: creater_name//联系人
