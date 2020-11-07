@@ -15,12 +15,12 @@
       <view class="line c3"></view>
       <view class="text t4">未提交人员：</view>
 
-      <view class="list_section">
+      <scroll-view scroll-y="true" class="list_section">
         <view class="list" wx:for="{{notSubmitName}}" wx:key="key">
           <view>{{item}}</view>
         </view>
-      </view>
-      <image class="delete" bindtap="delete" src="../../../images/delete.png"></image>
+      </scroll-view>
     </view>
   </view>
+  <image class="delete" bindtap="delete" src="../../../images/delete.png"></image>
 </view>

@@ -121,6 +121,7 @@ Page({
     app.globalData.judgment = true
     wx.showLoading({
       title: 'Loading...',
+      mask: true,
     });
     //获取数据
     let that = this
@@ -329,6 +330,7 @@ Page({
     // loading
     wx.showLoading({
       title: 'Loading...',
+      mask: true,
     });
     // 显示加载更多
     if (!isRefresh) {
