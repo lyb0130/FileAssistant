@@ -91,7 +91,6 @@ Page({
         url: '../upLoad/upLoad',
       })
     }
-
   },
   /**
    * 生命周期函数--监听页面加载
@@ -181,7 +180,7 @@ Page({
           }, 500)
         })
         .then(res => {
-          n = (res.result.data[0].toMeFile).sort(compareDeadline("deadline"))
+          n = res.result.data[0].toMeFile
           myCreat = res.result.data[0].myCreat
           console.log(n)
           console.log(myCreat)
@@ -189,36 +188,52 @@ Page({
           //把用户发布的问卷存入R_List中
           for (let i in myCreat) {
             new Promise((resolve) => {
-              resolve(that.countDown(myCreat[i].deadline))
-            }).then(myTime => {
-              let myItem = new ListItem(myCreat[i].title, myCreat[i].deadline, myTime)
-              R_list.push(myItem)
-              console.log(R_list)
+              resolve(wx.cloud.database().collection("demo").doc(myCreat[i]).get())
+            }).then(res => {
+              console.log(res)
+              let survey = res.data
+              new Promise((resolve) => {
+                resolve(that.countDown(survey.deadline))
+              }).then(myTime => {
+                let myItem = new ListItem(survey.title, survey.deadline, myTime)
+                R_list.push(myItem)
+                console.log(R_list)
+              }).catch(err => console.log(err))
             }).catch(err => console.log(err))
           }
-
           //把用户待填写、已填写的问卷分别存入P_List、Q_List中
           for (let r in n) {
             new Promise((resolve) => {
-              setTimeout(() => {
-                console.log(res)
-                resolve(that.countDown(n[r].deadline))
-                console.log(that.data.time)
-              }, )
-            }).then(remainingTime => {
-              if (that.data.time > 0) {
-                let item = new ListItem(n[r].title, n[r].deadline, remainingTime)
-                if (!n[r].IsSubmit) {
-                  P_list.push(item)
-                } else {
-                  Q_list.push(item)
+              resolve(wx.cloud.database().collection("demo").doc(n[r]).get())
+            }).then(res => {
+              let secSurvey = res.data
+              let IsSubmit = false
+
+              new Promise((resolve) => {
+                resolve(secSurvey.content.forEach(element => {
+                  if (element[0]) {
+                    IsSubmit = true
+                  }
+                }))
+              }).then(() => {
+                return new Promise((resolve) => {
+                  resolve(that.countDown(secSurvey.deadline))
+                })
+              }).then(remainingTime => {
+                if (that.data.time > 0) {
+                  let item = new ListItem(secSurvey.title, secSurvey.deadline, remainingTime)
+                  if (!IsSubmit) {
+                    P_list.push(item)
+                  } else {
+                    Q_list.push(item)
+                  }
                 }
-              }
-              console.log(P_list)
-              console.log(Q_list)
-              console.log("四")
-            }).catch(err => {
-              console.log(err)
+                console.log(P_list)
+                console.log(Q_list)
+                console.log("四")
+              }).catch(err => {
+                console.log(err)
+              })
             })
           }
         })
@@ -230,7 +245,7 @@ Page({
           }, )
         })
         .then(res => {
-          let list = res.data.sort(compareDeadline("deadline"))
+          let list = res.data
           for (let j in list) {
             new Promise((resolve) => {
               resolve(that.countDown(list[j].deadline))
@@ -358,10 +373,10 @@ Page({
 
       switch (index) {
         case 0:
-          res.list = P_list
+          res.list = P_list.sort(compareDeadline("deadline"))
           break
         case 1:
-          res.list = Q_list
+          res.list = Q_list.sort(compareDeadline("deadline"))
           break
         case 2:
           res.list = R_list.sort(compareDeadline("deadline"))
@@ -628,7 +643,7 @@ Page({
       path: '/pages/home/index/index'
     }
   },
-  onShareTimeline:function () {
+  onShareTimeline: function () {
     return {
       title: `新星书：一键创建问卷·你也可以`,
       desc: '高效办公、放心使用',

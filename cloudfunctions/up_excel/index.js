@@ -61,24 +61,32 @@ exports.main = async (event, context) => {
       } else {
         return Promise.resolve(1)
       }
-    })
-    .then(() => {
-      //向demo中插入该表格的数据及内容
-      const promise1 = new Promise((resolve) => {
-        console.log("顺序二 下")
-        resolve(db.collection("demo").add({
-          data: {
-            title: fileName,
-            header: header,
-            content: content,
-            deadline: deadline,
-            creater_id: creater_id,
-            isActive: "true"
-          }
-        }))
       })
+      .then(() => {
+        //向demo中插入该表格的数据及内容
+        return new Promise((resolve) => {
+          console.log("顺序二 下")
+          resolve(db.collection("demo").add({
+            data: {
+              title: fileName,
+              header: header,
+              content: content,
+              deadline: deadline,
+              creater_id: creater_id,
+              isActive: "true"
+            }
+          }))
+        })
+      }).
+      then(()=>{
+        return new Promise((resolve)=>resolve(db.collection("demo").where({
+          title: fileName
+        }).get()))
+      }).
+      then(getId => {
+        let sid = getId.data[0]._id
       //向须填写者的档案中加入该文件名，初始化为false，即未提交
-      const promise2 = new Promise((resolve) => {
+      const promise1 = new Promise((resolve) => {
         for (let j in idList) {
           db.collection("user").where({
             sno: idList[j]
@@ -88,12 +96,7 @@ exports.main = async (event, context) => {
                 sno: idList[j]
               }).update({
                 data: {
-                  toMeFile: _.push(
-                    [{
-                      title: fileName,
-                      deadline: deadline,
-                      IsSubmit: false
-                    }])
+                  toMeFile: _.push(sid)
                 }
               })
               if(res.data[0]._openid){
@@ -107,7 +110,7 @@ exports.main = async (event, context) => {
                       value: fileName //问卷名称
                     },
                     thing2: {
-                      value: "请注意截止时间"//温馨提示
+                      value: "注意截止时间" //温馨提示
                     },
                     thing3: {
                       value: creater_name//联系人
@@ -123,32 +126,23 @@ exports.main = async (event, context) => {
                 data: {
                   sno: idList[j],
                   name: nameList[j],
-                  toMeFile: [{
-                    title: fileName,
-                    deadline: deadline,
-                    IsSubmit: false
-                  }],
+                  toMeFile: [sid],
                 }
               }).then(res => console.log(res))
             }
           })
         }
       });
-      const promise3 = new Promise((resolve) => {
+      const promise2 = new Promise((resolve) => {
         db.collection("user").where({
           sno: creater_id
         }).update({
           data: {
-            myCreat: _.push(
-              [{
-                title: fileName,
-                deadline: deadline,
-                isActive: true
-              }])
+            myCreat: _.push(sid)
           }
         })
       })
-      Promise.all([promise1, promise2, promise3]).then(
+      Promise.all([promise1, promise2]).then(
         res => {
           console.log(res)
         })

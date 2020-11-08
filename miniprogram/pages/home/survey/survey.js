@@ -43,7 +43,7 @@ Page({
           resolve(wx.cloud.callFunction({
             name: "submit_data",
             data: {
-              id: app.globalData.unique_id,
+              // id: app.globalData.unique_id,
               title: that.data.title,
               answer: answer,
               indexList: that.data.indexList

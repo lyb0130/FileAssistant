@@ -41,7 +41,6 @@ Page({
             .then(res => {
               console.log(res, "删除成功")
               return new Promise((resolve) => {
-
                 wx.showToast({
                   title: '删除成功',
                   duration: 2000

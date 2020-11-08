@@ -1,6 +1,4 @@
 // 云函数入口文件
-//删除功能，尚未测试
-
 const cloud = require('wx-server-sdk')
 
 cloud.init({
@@ -19,6 +17,7 @@ exports.main = async (event, context) => {
       }, 200)
     }).then(res => {
       console.log(res)
+      var sid = res.data[0]._id
       var creater_id = res.data[0].creater_id
       var list = res.data[0].content
       for (let i in list) {
@@ -28,12 +27,8 @@ exports.main = async (event, context) => {
             sno: list[i][2]
           }).update({
             data: {
-              myCreat: _.pull({
-                title: fileName
-              }),
-              toMeFile: _.pull({
-                title: fileName
-              })
+              myCreat: _.pull(sid),
+              toMeFile: _.pull(sid)
             }
           })
         } else {
@@ -42,9 +37,7 @@ exports.main = async (event, context) => {
             sno: list[i][2]
           }).update({
             data: {
-              toMeFile: _.pull({
-                title: fileName
-              })
+              toMeFile: _.pull(sid)
             }
           })
         }
